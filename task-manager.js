@@ -1,14 +1,4 @@
-/**
- * ========================================
- * TASK MANAGEMENT SYSTEM
- * ========================================
- * Demonstrates: Error Handling, Validations, 
- * Arrays, Strings, and Date manipulation
- */
 
-// ============================================
-// CUSTOM ERROR HANDLING
-// ============================================
 
 class ValidationError extends Error {
     constructor(message) {
