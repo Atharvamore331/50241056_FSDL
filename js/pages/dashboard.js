@@ -27,7 +27,7 @@ export function renderDashboard() {
                 <h2>Welcome back, ${user.name}!</h2>
                 <p style="color: var(--text-muted);">Here's a summary of your eco-impact.</p>
             </div>
-            <a href="#/admin" class="btn btn-outline btn-sm">Admin Panel</a>
+            ${user.role === 'admin' ? '<a href="#/admin" class="btn btn-outline btn-sm">Admin Panel</a>' : ''}
         </div>
         
         <!-- Stats summary -->

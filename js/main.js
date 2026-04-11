@@ -16,7 +16,7 @@ import { renderLogin, renderSignup } from './pages/auth.js';
 import { renderDashboard } from './pages/dashboard.js';
 import { renderAdmin } from './pages/admin.js';
 
-import { initStore } from './store.js';
+import { initStore, userState } from './store.js';
 
 const routes = {
     '/': renderHome,
@@ -36,10 +36,22 @@ const routes = {
 const appContainer = document.getElementById('app');
 
 function router() {
-    let hash = window.location.hash.slice(1) || '/';
+    let hash = window.location.hash.slice(1);
     
-    // Quick handle for dynamic routes (e.g., news/123)
+    if (!hash || hash === '/') {
+        hash = userState.isLoggedIn ? '/dashboard' : '/login';
+        window.location.hash = '#' + hash;
+        return;
+    }
+    
     let basePath = hash.split('?')[0]; 
+    
+    if (basePath === '/admin' && (!userState.isLoggedIn || userState.user.role !== 'admin')) {
+        window.showToast('Access Denied. Admins only.', 'error');
+        window.location.hash = userState.isLoggedIn ? '#/dashboard' : '#/login';
+        return;
+    }
+
     let renderFunc = routes[basePath];
 
     if(basePath.split('/').length > 2 && basePath.startsWith('/news')) {

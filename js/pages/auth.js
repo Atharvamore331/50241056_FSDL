@@ -20,6 +20,7 @@ function renderAuthPage(isLogin) {
                 <div class="form-group">
                     <label class="form-label">Email</label>
                     <input type="email" id="auth-email" class="form-control" required placeholder="user@example.com">
+                    ${isLogin ? '<p style="font-size:0.75rem; color:var(--text-muted); margin-top:0.25rem;">Login as admin: <b>admin@ecohub.com</b></p>' : ''}
                 </div>
                 <div class="form-group">
                     <label class="form-label">Password</label>
@@ -44,12 +45,14 @@ function renderAuthPage(isLogin) {
         
         const email = container.querySelector('#auth-email').value;
         const name = isLogin ? email.split('@')[0] : container.querySelector('#auth-name').value;
+        const role = email.toLowerCase() === 'admin@ecohub.com' ? 'admin' : 'user';
         
         userState.isLoggedIn = true;
         userState.user = {
             name: name,
             email: email,
-            points: isLogin ? 120 : 0
+            points: isLogin ? 120 : 0,
+            role: role
         };
         
         import('../store.js').then(store => {
