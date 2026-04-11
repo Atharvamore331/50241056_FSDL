@@ -44,8 +44,6 @@ function router() {
         return;
     }
     
-    let basePath = hash.split('?')[0]; 
-    
     if (basePath === '/admin' && (!userState.isLoggedIn || userState.user.role !== 'admin')) {
         window.showToast('Access Denied. Admins only.', 'error');
         window.location.hash = userState.isLoggedIn ? '#/dashboard' : '#/login';
