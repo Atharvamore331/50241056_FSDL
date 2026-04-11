@@ -37,10 +37,10 @@ const appContainer = document.getElementById('app');
 
 function router() {
     let hash = window.location.hash.slice(1);
-    
-    if (!hash || hash === '/') {
-        hash = userState.isLoggedIn ? '/dashboard' : '/login';
-        window.location.hash = '#' + hash;
+    let basePath = hash ? hash.split('?')[0] : '/'; 
+
+    if (!userState.isLoggedIn && basePath !== '/login' && basePath !== '/signup') {
+        window.location.hash = '#/login';
         return;
     }
     
@@ -116,13 +116,36 @@ window.showToast = (message, type = 'success') => {
 function initApp() {
     initStore();
     
-    document.getElementById('navbar').innerHTML = renderNavbar();
-    document.getElementById('footer').innerHTML = renderFooter();
+    const navEl = document.getElementById('navbar');
+    const footEl = document.getElementById('footer');
     
-    setupNavbarControls();
+    window.renderAppShell = () => {
+        if (userState.isLoggedIn) {
+            navEl.style.display = 'block';
+            footEl.style.display = 'block';
+            if (navEl.innerHTML === '') {
+                navEl.innerHTML = renderNavbar();
+                footEl.innerHTML = renderFooter();
+                setupNavbarControls();
+            }
+        } else {
+            navEl.style.display = 'none';
+            footEl.style.display = 'none';
+            navEl.innerHTML = '';
+            footEl.innerHTML = '';
+        }
+    };
+
+    renderAppShell();
     
-    window.addEventListener('hashchange', router);
-    window.addEventListener('load', router);
+    window.addEventListener('hashchange', () => {
+        renderAppShell();
+        router();
+    });
+    window.addEventListener('load', () => {
+        renderAppShell();
+        router();
+    });
     
     if (localStorage.getItem('theme') === 'dark') {
         document.documentElement.setAttribute('data-theme', 'dark');
