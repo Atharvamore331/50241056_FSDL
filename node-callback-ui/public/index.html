@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Result</title>
+</head>
+<body>
+
+<h2>Enter Marks (5 Subjects)</h2>
+
+<input id="m1" placeholder="Subject 1"><br><br>
+<input id="m2" placeholder="Subject 2"><br><br>
+<input id="m3" placeholder="Subject 3"><br><br>
+<input id="m4" placeholder="Subject 4"><br><br>
+<input id="m5" placeholder="Subject 5"><br><br>
+
+<button onclick="getResult()">Calculate Result</button>
+
+<h3 id="output"></h3>
+
+<script>
+function getResult() {
+    let marks = [
+        Number(document.getElementById("m1").value),
+        Number(document.getElementById("m2").value),
+        Number(document.getElementById("m3").value),
+        Number(document.getElementById("m4").value),
+        Number(document.getElementById("m5").value)
+    ];
+
+    fetch("/result", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ marks })
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("output").innerHTML =
+            `Total: ${data.total} <br>
+             Percentage: ${data.percentage}% <br>
+             Grade: ${data.grade}`;
+    });
+}
+</script>
+
+</body>
+</html>
