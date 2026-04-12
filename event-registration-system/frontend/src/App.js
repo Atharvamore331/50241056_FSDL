@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 
-const API_BASE = "https://laughing-xylophone-wrjgw65g9r5526w9-5000.app.github.dev/";
+const API_BASE = "https://laughing-xylophone-wrjgw65g9r5526w9-5000.app.github.dev";
 
 function App() {
   const [name, setName] = useState("");
   const [eventName, setEventName] = useState("");
   const [email, setEmail] = useState("");
   const [registrations, setRegistrations] = useState([]);
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const loadRegistrations = async () => {
     try {
       const response = await fetch(`${API_BASE}/registrations`);
       const data = await response.json();
-      setRegistrations(data);
+      setRegistrations(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error("Load error:", error);
+      setMessage("Failed to load registrations.");
     }
   };
 
@@ -23,32 +26,49 @@ function App() {
     loadRegistrations();
   }, []);
 
-  const addRegistration = async () => {
-    try {
-      if (!name || !eventName || !email) {
-        alert("Please fill all fields");
-        return;
-      }
+  const addRegistration = async (e) => {
+    e.preventDefault();
+    setMessage("");
 
+    if (!name.trim() || !eventName.trim() || !email.trim()) {
+      setMessage("Please fill all fields.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
       const response = await fetch(`${API_BASE}/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ name, eventName, email })
+        body: JSON.stringify({
+          name: name.trim(),
+          eventName: eventName.trim(),
+          email: email.trim()
+        })
       });
 
       const data = await response.json();
-      alert(data.message);
 
+      if (!response.ok) {
+        setMessage(data.message || "Registration failed.");
+        setLoading(false);
+        return;
+      }
+
+      setMessage(data.message || "Registration added successfully.");
       setName("");
       setEventName("");
       setEmail("");
-      loadRegistrations();
+      await loadRegistrations();
     } catch (error) {
       console.error("Add error:", error);
-      alert("Failed to connect to backend");
+      setMessage("Failed to connect to backend.");
     }
+
+    setLoading(false);
   };
 
   const deleteRegistration = async (id) => {
@@ -58,11 +78,11 @@ function App() {
       });
 
       const data = await response.json();
-      alert(data.message);
-      loadRegistrations();
+      setMessage(data.message || "Deleted successfully.");
+      await loadRegistrations();
     } catch (error) {
       console.error("Delete error:", error);
-      alert("Failed to connect to backend");
+      setMessage("Failed to delete registration.");
     }
   };
 
@@ -72,7 +92,7 @@ function App() {
         <h1>Event Registration System</h1>
         <p className="subtitle">Node.js + Express + MongoDB + React</p>
 
-        <div className="form-group">
+        <form className="form-group" onSubmit={addRegistration}>
           <input
             type="text"
             placeholder="Enter Name"
@@ -94,8 +114,16 @@ function App() {
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <button onClick={addRegistration}>Register</button>
-        </div>
+          <button type="submit" disabled={loading}>
+            {loading ? "Registering..." : "Register"}
+          </button>
+        </form>
+
+        {message && (
+          <p style={{ marginTop: "12px", fontWeight: "bold" }}>
+            {message}
+          </p>
+        )}
 
         <h2>Registered Participants</h2>
 
@@ -112,6 +140,7 @@ function App() {
                 </div>
                 <button
                   className="delete-btn"
+                  type="button"
                   onClick={() => deleteRegistration(item._id)}
                 >
                   Delete
