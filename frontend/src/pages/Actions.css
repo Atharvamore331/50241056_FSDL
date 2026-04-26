@@ -1,0 +1,37 @@
+.action-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.difficulty-badge {
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: capitalize;
+}
+.points-badge {
+  background-color: var(--primary-light);
+  color: var(--primary-hover);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.action-card {
+  transition: var(--transition);
+}
+.action-card.completed {
+  opacity: 0.8;
+  border-color: var(--primary);
+  background-color: rgba(16, 185, 129, 0.05);
+  transform: translateY(0) scale(0.98);
+}
+.action-title {
+  transition: var(--transition);
+}
+.action-title.strike {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
