@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>End Semester Hall Ticket</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eee;
+        }
+
+        .container {
+            width: 820px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border: 3px solid black;
+        }
+
+        h2, h3 {
+            margin: 5px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1.8px solid black;
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .photo {
+            width: 110px;
+            height: 140px;
+            border: 1px solid black;
+        }
+
+        .print-btn {
+            text-align: center;
+            margin: 15px;
+        }
+
+        .note {
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        @media print {
+            .print-btn {
+                display: none;
+            }
+            body {
+                background: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="print-btn">
+    <button onclick="window.print()">Print / Save as PDF</button>
+</div>
+
+<div class="container">
+
+    <!-- Header -->
+    <table>
+        <tr>
+            <td class="center">
+                <h2>FCRIT</h2>
+                <h3>Semester Examination Hall Ticket – 2026</h3>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Student Information -->
+    <table>
+        <tr>
+            <th colspan="4" class="center">CANDIDATE INFORMATION</th>
+        </tr>
+
+        <tr>
+            <td><b>Name</b></td>
+            <td>Atharva More</td>
+            <td rowspan="4" colspan="2" class="center">
+                <img src="photo.jpg" class="photo" alt="Student Photo">
+            </td>
+        </tr>
+
+        <tr>
+            <td><b>Roll No</b></td>
+            <td>5024106</td>
+        </tr>
+
+        <tr>
+            <td><b>Branch</b></td>
+            <td>Information Technology</td>
+        </tr>
+
+        <tr>
+            <td><b>Semester</b></td>
+            <td>4</td>
+        </tr>
+    </table>
+
+    <!-- Subject Schedule -->
+    <table>
+        <tr>
+            <th colspan="4" class="center">SUBJECT SCHEDULE</th>
+        </tr>
+        <tr class="center">
+            <th>Code</th>
+            <th>Subject</th>
+            <th>Date</th>
+            <th>Time</th>
+        </tr>
+
+        <tr>
+            <td>CE601</td>
+            <td>FSDL</td>
+            <td>12 March 2026</td>
+            <td>9:30 AM – 12:30 PM</td>
+        </tr>
+
+        <tr>
+            <td>CE602</td>
+            <td>Computer Networks</td>
+            <td>15 March 2026</td>
+            <td>9:30 AM – 12:30 PM</td>
+        </tr>
+
+        <tr>
+            <td>CE603</td>
+            <td>Operating System</td>
+            <td>18 March 2026</td>
+            <td>9:30 AM – 12:30 PM</td>
+        </tr>
+
+        <tr>
+            <td>CE604</td>
+            <td>Software Engineering</td>
+            <td>21 March 2026</td>
+            <td>9:30 AM – 12:30 PM</td>
+        </tr>
+    </table>
+
+    <!-- Exam Center -->
+    <table>
+        <tr>
+            <th colspan="2" class="center">EXAMINATION CENTER</th>
+        </tr>
+        <tr>
+            <td><b>Center Name</b></td>
+            <td> FCRIT Examination Hall</td>
+        </tr>
+        <tr>
+            <td><b>Center Address</b></td>
+            <td>Vashi – 411007, Maharashtra</td>
+        </tr>
+    </table>
+
+    <!-- Instructions -->
+    <table>
+        <tr>
+            <th class="center">GENERAL INSTRUCTIONS</th>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>Hall ticket must be carried for every examination.</li>
+                    <li>Entry after exam start time is not permitted.</li>
+                    <li>Electronic devices are strictly prohibited.</li>
+                    <li>Follow seating arrangement displayed at the center.</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Signatures -->
+    <table>
+        <tr>
+            <td class="center">
+                <br>_____________________<br>
+                Student Signature
+            </td>
+            <td class="center">
+                <br>_____________________<br>
+                Chief Superintendent
+            </td>
+        </tr>
+    </table>
+
+    <div class="note center">
+        * This is a system-generated hall ticket.
+    </div>
+
+</div>
+
+</body>
+</html>

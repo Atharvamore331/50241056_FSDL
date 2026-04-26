@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>User Portfolio</title>
+
+<style>
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #dbeafe, #bfdbfe);
+    padding: 40px;
+}
+
+/* MAIN CONTAINER */
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* NAME HEADER */
+#name {
+    text-align: center;
+    font-size: 38px;
+    color: #1e3a8a;
+    margin-bottom: 10px;
+}
+
+#name::after {
+    content: " | Portfolio";
+    font-size: 18px;
+    color: #2563eb;
+}
+
+/* SUBTEXT */
+.tagline {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #555;
+    font-style: italic;
+}
+
+/* SECTION HEADINGS */
+h2 {
+    color: #1d4ed8;
+    margin-top: 25px;
+    border-bottom: 2px solid #93c5fd;
+    padding-bottom: 5px;
+}
+
+/* LISTS */
+ul {
+    list-style-type: square;
+    margin-left: 30px;
+    margin-top: 10px;
+}
+
+li {
+    padding: 6px;
+    transition: 0.3s;
+}
+
+li:hover {
+    color: #1e40af;
+    transform: translateX(5px);
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #cbd5e1;
+}
+
+th {
+    background-color: #2563eb;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #eff6ff;
+}
+
+/* INPUT */
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 1px solid #94a3b8;
+}
+
+/* BUTTON */
+button {
+    margin-top: 12px;
+    padding: 10px 20px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #1e40af;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1 id="name">Atharva More</h1>
+    <p class="tagline">Passionate Developer | Problem Solver | Tech Enthusiast</p>
+
+    <h2>Skills</h2>
+    <ul>
+        <li>HTML & CSS</li>
+        <li>JavaScript</li>
+        <li>Python</li>
+        <li>Machine Learning</li>
+    </ul>
+
+    <h2>Education</h2>
+    <table>
+        <tr>
+            <th>Course</th>
+            <th>Institute</th>
+            <th>Year</th>
+        </tr>
+        <tr>
+            <td>Btech IT</td>
+            <td>FCRIT</td>
+            <td>2028</td>
+        </tr>
+        <tr>
+            <td>HSC</td>
+            <td>Royal Jr College</td>
+            <td>2024</td>
+        </tr>
+    </table>
+
+    <h2>Contact Me</h2>
+    <input type="text" id="message" placeholder="Enter your message">
+    <br>
+    <button onclick="sendMessage()">Send Message</button>
+
+</div>
+
+<script>
+function sendMessage() {
+    alert("Thank you! Your message has been sent.");
+}
+</script>
+
+</body>
+</html>

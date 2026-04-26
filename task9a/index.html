@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="studentPlannerApp">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Planner Dashboard</title>
+
+  <!-- AngularJS 1.x CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body ng-controller="PlannerController">
+
+  <!-- Top Header -->
+  <header class="navbar">
+    <div>
+      <h1>Student Planner Dashboard</h1>
+      <p class="subtitle">A mini AngularJS project with interactive UI</p>
+    </div>
+    <div class="header-badge">
+      <span>{{ todayMessage }}</span>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container">
+
+    <!-- Left Side -->
+    <section class="left-panel">
+
+      <!-- Student Profile Card -->
+      <div class="card">
+        <div class="card-header">
+          <h2>Student Profile</h2>
+          <span class="pill">Live Form</span>
+        </div>
+
+        <div class="grid-two">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" ng-model="student.name" placeholder="Enter your name">
+          </div>
+
+          <div class="form-group">
+            <label>Course</label>
+            <input type="text" ng-model="student.course" placeholder="Enter your course">
+          </div>
+
+          <div class="form-group">
+            <label>Year</label>
+            <select ng-model="student.year">
+              <option value="">Select year</option>
+              <option>1st Year</option>
+              <option>2nd Year</option>
+              <option>3rd Year</option>
+              <option>4th Year</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Goal Hours / Day</label>
+            <input type="number" ng-model="student.studyHours" placeholder="Eg. 4">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>About</label>
+          <textarea ng-model="student.about" rows="4" placeholder="Write something about yourself"></textarea>
+        </div>
+
+        <div class="profile-preview">
+          <h3>Profile Preview</h3>
+          <p><strong>Name:</strong> {{ student.name || 'Not entered yet' }}</p>
+          <p><strong>Course:</strong> {{ student.course || 'Not entered yet' }}</p>
+          <p><strong>Year:</strong> {{ student.year || 'Not selected' }}</p>
+          <p><strong>Study Goal:</strong> {{ student.studyHours || 0 }} hrs/day</p>
+          <p><strong>About:</strong> {{ student.about || 'No description added' }}</p>
+        </div>
+      </div>
+
+      <!-- Task Manager Card -->
+      <div class="card">
+        <div class="card-header">
+          <h2>Task Manager</h2>
+          <span class="pill accent">{{ tasks.length }} Tasks</span>
+        </div>
+
+        <div class="grid-two">
+          <div class="form-group">
+            <label>Task Title</label>
+            <input type="text" ng-model="newTask.title" placeholder="Enter task title">
+          </div>
+
+          <div class="form-group">
+            <label>Priority</label>
+            <select ng-model="newTask.priority">
+              <option value="">Select priority</option>
+              <option>High</option>
+              <option>Medium</option>
+              <option>Low</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn primary" ng-click="addTask()">Add Task</button>
+          <button class="btn secondary" ng-click="clearCompleted()">Clear Completed</button>
+        </div>
+
+        <p class="error" ng-show="showError">Please enter task title and priority.</p>
+
+        <div class="task-list" ng-show="tasks.length > 0">
+          <div class="task-item" ng-repeat="task in tasks track by $index">
+            <div class="task-left">
+              <input type="checkbox" ng-model="task.done">
+              <div>
+                <h4 ng-class="{done: task.done}">{{ task.title }}</h4>
+                <p>
+                  Priority:
+                  <span class="priority"
+                        ng-class="{
+                          'high': task.priority === 'High',
+                          'medium': task.priority === 'Medium',
+                          'low': task.priority === 'Low'
+                        }">
+                    {{ task.priority }}
+                  </span>
+                </p>
+              </div>
+            </div>
+
+            <button class="icon-btn" ng-click="deleteTask($index)">Delete</button>
+          </div>
+        </div>
+
+        <div class="empty-state" ng-if="tasks.length === 0">
+          <p>No tasks added yet. Start by adding your first task.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Side -->
+    <aside class="right-panel">
+
+      <!-- Summary Card -->
+      <div class="card">
+        <div class="card-header">
+          <h2>Quick Summary</h2>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <h3>{{ tasks.length }}</h3>
+            <p>Total Tasks</p>
+          </div>
+
+          <div class="stat-box">
+            <h3>{{ getCompletedTasks() }}</h3>
+            <p>Completed</p>
+          </div>
+
+          <div class="stat-box">
+            <h3>{{ tasks.length - getCompletedTasks() }}</h3>
+            <p>Pending</p>
+          </div>
+
+          <div class="stat-box">
+            <h3>{{ student.studyHours || 0 }}</h3>
+            <p>Goal Hours</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Motivation Card -->
+      <div class="card">
+        <div class="card-header">
+          <h2>Motivation Panel</h2>
+        </div>
+
+        <p class="motivation-text">
+          {{ getMotivationMessage() }}
+        </p>
+
+        <div class="quote-box">
+          <p>"Small progress each day adds up to big results."</p>
+        </div>
+      </div>
+
+      <!-- Angular Features Card -->
+      <div class="card">
+        <div class="card-header">
+          <h2>AngularJS Features Used</h2>
+        </div>
+
+        <ul class="feature-list">
+          <li><strong>ng-controller</strong> to control page data</li>
+          <li><strong>ng-model</strong> for two-way data binding</li>
+          <li><strong>{{ }}</strong> expressions for live output</li>
+          <li><strong>ng-repeat</strong> to display tasks</li>
+          <li><strong>ng-click</strong> for buttons</li>
+          <li><strong>ng-show / ng-if</strong> for dynamic visibility</li>
+        </ul>
+      </div>
+
+    </aside>
+  </main>
+
+  <!-- External JS -->
+  <script src="script.js"></script>
+</body>
+</html>
