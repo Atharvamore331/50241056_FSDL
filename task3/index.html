@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel Management System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Hotel Paradise</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Rooms</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Booking</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <div class="p-5 mb-4 bg-light rounded-3 text-center">
+        <h1 class="display-5 fw-bold">Welcome to Hotel Paradise</h1>
+        <p class="fs-4">Book your luxury stay with comfort and elegance.</p>
+        <button class="btn btn-primary btn-lg">Book Now</button>
+    </div>
+</div>
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Booking</a></li>
+            <li class="breadcrumb-item active" aria-current="page">New Reservation</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Available Rooms</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="Room">
+                <div class="card-body">
+                    <h5 class="card-title">Deluxe Room</h5>
+                    <p class="card-text">₹4000 / Night</p>
+                    <button class="btn btn-success">Select</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="Room">
+                <div class="card-body">
+                    <h5 class="card-title">Executive Suite</h5>
+                    <p class="card-text">₹7000 / Night</p>
+                    <button class="btn btn-success">Select</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="Room">
+                <div class="card-body">
+                    <h5 class="card-title">Presidential Suite</h5>
+                    <p class="card-text">₹12000 / Night</p>
+                    <button class="btn btn-success">Select</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Booking Form</h2>
+    <form>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" placeholder="Enter your name">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" placeholder="Enter your email">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label">Check-in Date</label>
+                <input type="date" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Check-out Date</label>
+                <input type="date" class="form-control">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Room Type</label>
+            <select class="form-select">
+                <option>Deluxe Room</option>
+                <option>Executive Suite</option>
+                <option>Presidential Suite</option>
+            </select>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Confirm Booking</button>
+            <button type="reset" class="btn btn-danger">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
