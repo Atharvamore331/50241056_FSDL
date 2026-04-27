@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 
-const API_BASE = "https://laughing-xylophone-wrjgw65g9r5526w9-5000.app.github.dev";
+const API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+  ? "http://localhost:5000"
+  : window.location.origin.replace("-3000", "-5000");
+
 
 function App() {
   const [name, setName] = useState("");
